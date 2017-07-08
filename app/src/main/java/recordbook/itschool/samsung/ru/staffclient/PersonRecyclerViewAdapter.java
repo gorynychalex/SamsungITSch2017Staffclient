@@ -55,21 +55,24 @@ public class PersonRecyclerViewAdapter extends RecyclerView.Adapter<PersonRecycl
     public PersonViewHolder onCreateViewHolder(final ViewGroup parent,
                                                int viewType) {
         // create a new view
-        View v = LayoutInflater.from(parent.getContext())
+        final View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.my_text_view, parent, false);
         // set the view's size, margins, paddings and layout parameters
 
+        final PersonViewHolder personViewHolder = new PersonViewHolder(v);
 
         //First fashion: HANDLE ONCLICK Set on click listener
         //Первый способ обработать касания (откуда взять номер позиции - непонятно)
-//        v.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(parent.getContext(),"Hello! " , Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(parent.getContext(),"Hello! " + personViewHolder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(parent.getContext(),PersonActivity.class);
+                view.getContext().startActivity(intent);
+            }
+        });
 
-        return new PersonViewHolder(v);
+        return personViewHolder;
     }
 
     @Override
